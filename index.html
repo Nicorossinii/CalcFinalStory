@@ -26,9 +26,9 @@
 
   <div class="success-overlay" id="success-overlay" role="dialog" aria-labelledby="success-title" aria-hidden="true">
     <div class="success-card">
-      <h3 id="success-title">Correct! 🌺</h3>
+      <h3 id="success-title">Correct!</h3>
       <img src="assets/reward.png" alt="Celebration" width="320" height="480" />
-      <p id="success-message">The island adventure continues...</p>
+      <p id="success-message">The adventure continues...</p>
     </div>
   </div>
 
@@ -42,18 +42,18 @@
       <div class="home-content">
         <div class="fail-banner" id="fail-banner" role="alert">
           <h3>You didn't make it...</h3>
-          <p id="fail-message">A wrong answer sent Alex and Keyshawn back to the beginning. Read the story, work through the calculus carefully, and try again.</p>
+          <p id="fail-message">A wrong answer sent Alex and Keyshawn back to the beginning. Read the story, work through the calculus carefully, and try again</p>
         </div>
         <h1>Survive the Sine Wave</h1>
-        <p class="tagline">One tropical tale. Three calculus challenges. Answer every question correctly—or wash back to shore.</p>
+        <p class="tagline">One tropical tale. Three calculus challenges. Answer every question correctly or wash back to shore.</p>
         <div class="story-box">
           <p>
             <strong>Alex</strong> and <strong>Keyshawn</strong> are adrift in a small rowboat when they spot an abandoned island on the horizon.
             The hull is cracked, water is pouring in, and the shore looks impossibly far away.
-            Only your calculus can keep them alive long enough to reach land.
+            Only YOUR calculus can keep them alive long enough to reach land.
           </p>
         </div>
-        <button type="button" class="btn btn-primary" id="btn-begin">Begin the story</button>
+        <button type="button" class="btn btn-primary" id="btn-begin">Begin the story!</button>
       </div>
     </div>
   </section>
@@ -77,8 +77,8 @@
       </figure>
 
       <div class="narrative">
-        Alex and Keyshawn cling to their rowboat as waves slap the sides. Through the spray they see the island—but a jagged hole in the hull gurgles below the waterline.
-        Alex remembers the boat's cross-section: from the keel to the gunwale on one side, the depth profile is <em>y = 9 − x²</em> metres, measured from the centreline out to <em>x = 3</em> m.
+        Alex and Keyshawn cling to their rowboat as waves strike the sides. They can just make out an island in the distance; however, a large hole in the hull bellows below the waterline.
+        Alex remembers the boat's cross-section: from the one side to the other, area is <em>y = 9 − x²</em> meters squared, measured from the centreline out to <em>x = 3</em> m.
         The boat holds <em>27 m³</em> of air before it floods. Water enters through the hole at a constant <em>0.9 m³/min</em>.
       </div>
 
@@ -119,10 +119,10 @@
       </figure>
 
       <div class="narrative">
-        The boat slips under. Alex and Keyshawn strike out for the island. The shore is a straight line; distance from shore is measured in metres.
-        At this instant, Alex is <em>80 m</em> from shore swimming at <em>1.0 m/s</em> toward land.
-        Keyshawn is <em>50 m</em> from shore swimming at <em>1.4 m/s</em> toward land along the same path.
-        Alex is behind Keyshawn, chasing the same point on the beach.
+        Oh No! The boat slips under the water! Alex and Keyshawn leap out and try their luck swimming for the island.
+        In this instant, Alex is <em>80 m</em> from shore, swimming at <em>1.0 m/s</em>.
+        Keyshawn, thrown by a wave, is <em>50 m</em> from shore swimming at <em>1.4 m/s</em> toward land along the same path.
+      
       </div>
 
       <div class="problem-card">
@@ -160,9 +160,9 @@
       </figure>
 
       <div class="narrative">
-        They crawl onto the abandoned island, soaked but alive. A crate of supplies holds exactly <em>150 kg</em> of food.
-        Their combined consumption (in kg) after <em>t</em> full days on the island is modelled by <em>C(t) = 6t²</em>, so food remaining is <em>F(t) = 150 − 6t²</em>.
-        They starve when <em>F(t) = 0</em>.
+        They both crawl onto the abandoned island, soaked but alive. Upon the shore, they find a crate of supplies that holds exactly <em>150 kg</em> of food.
+        Their combined consumption, in kg, after <em>t</em> full days on the island is modelled by <em>C(t) = 6t²</em>.
+        When <em>F(t) = 0</em> they will die of starvation.
       </div>
 
       <div class="problem-card">
@@ -189,8 +189,8 @@
         <img src="assets/reward.png" alt="Celebration" width="320" height="480" />
       </figure>
       <p>
-        Alex and Keyshawn made it—thanks to limits, integrals, related rates, and derivatives wielded at exactly the right moments.
-        The abandoned island is theirs. For now.
+        Alex and Keyshawn actually made it! Thanks to limits, integrals, related rates, and derivatives utilised by you at exactly the right moments.
+        The island is theirs. For now...
       </p>
       <button type="button" class="btn btn-primary" id="btn-play-again">Play again</button>
     </div>
@@ -204,7 +204,7 @@
         screen: "screen-ch1",
         optsId: "opts-ch1",
         fbId: "fb-ch1",
-        failMsg: "The boat filled too fast—or the hull area was wrong. Alex and Keyshawn went under. Start again from the beach.",
+        failMsg: "The boat filled up too fast and Alex and Keyshawn died thanks to <u>you</u>. Start again from the beach.",
         options: [
           { label: "Area = 18 m², Time = 30 minutes", correct: true },
           { label: "Area = 18 m², Time = 24 minutes", correct: false },
@@ -216,7 +216,7 @@
         screen: "screen-ch2",
         optsId: "opts-ch2",
         fbId: "fb-ch2",
-        failMsg: "They misjudged the gap between them and swam off course. The island fades from view. Try again.",
+        failMsg: "They misjudged the gap between them and swam off course thanks to <u>you</u>. The island fades from view. Start again from the beach.",
         options: [
           { label: "dD/dt = +0.4 m/s (Keyshawn pulls away at 0.4 m/s)", correct: true },
           { label: "dD/dt = −0.4 m/s (they get closer)", correct: false },
@@ -228,7 +228,7 @@
         screen: "screen-ch3",
         optsId: "opts-ch3",
         fbId: "fb-ch3",
-        failMsg: "They ran out of food early—or counted the wrong number of days. The island wasn't as safe as it looked.",
+        failMsg: "They ran out of food early thanks to <u>you</u>. So close! Start again from the beach.",
         options: [
           { label: "F′(t) = −12t; food lasts 5 days", correct: true },
           { label: "F′(t) = 12t; food lasts 5 days", correct: false },
@@ -240,9 +240,9 @@
 
     const LETTERS = ["A", "B", "C", "D"];
     const SUCCESS_MESSAGES = [
-      "Chapter 1 cleared—the boat math checks out!",
-      "Chapter 2 cleared—they're closing in on shore!",
-      "Chapter 3 cleared—the island is secure!"
+      "Chapter 1 cleared-the math checks out!",
+      "Chapter 2 cleared-they're closing in on shore!",
+      "Chapter 3 cleared-they survive on the food long enough!"
     ];
 
     const shuffledByChapter = CHAPTERS.map(() => []);
@@ -254,7 +254,7 @@
     let musicEnabled = true;
 
     bgMusic.volume = 0.35;
-    clickSound.volume = 0.5;
+    clickSound.volume = 0.2;
 
     function shuffleArray(items) {
       const arr = items.slice();
