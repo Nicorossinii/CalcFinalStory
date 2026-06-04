@@ -1,4 +1,3 @@
-
 :root {
   --sunset-top: #ff8c69;
   --sunset-mid: #e85d4a;
@@ -178,6 +177,15 @@ body {
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
+}
+
+.story-box::before {
+  content: "🌺";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: 1.25rem;
+  opacity: 0.6;
 }
 
 .story-box p {
