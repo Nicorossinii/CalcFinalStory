@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calc Final Story</title>
   <link rel="icon" type="image/x-icon" href="IMG_2075.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,6 +35,10 @@
   <!-- HOME -->
   <section class="screen active" id="screen-home">
     <div class="home-hero">
+      <div class="home-top">
+        <span class="brand">Calc Final Story</span>
+        <span class="chapter-pill" id="home-progress">Chapter 0 / 3</span>
+      </div>
       <div class="home-content">
         <div class="fail-banner" id="fail-banner" role="alert">
           <h3>You didn't make it...</h3>
@@ -73,20 +78,20 @@
 
       <div class="narrative">
         Alex and Keyshawn cling to their rowboat as waves strike the sides. They can just make out an island in the distance; however, a large hole in the hull bellows below the waterline.
-        Alex remembers the boat's cross-section: from the one side to the other, area is <em>y = 9 − x²</em> meters squared, measured from the centreline out to <em>x = 3</em> m.
-        The boat holds <em>27 m³</em> of air before it floods. Water enters through the hole at a constant <em>0.9 m³/min</em>.
+        Alex remembers the boat's cross-section: from the one side to the other, area is <em>y = 9 − x²</em> m^2. The boat is 3 meters long and
+        can hold <em>27 m³</em> of water before it floods. Water enters through the hole at a constant <em>0.9 m³/min</em>.
       </div>
 
       <div class="problem-card">
         <p class="problem-type">Combined integral problem</p>
         <p class="problem-text">
-          Find <strong>(A)</strong> the cross-sectional area of one side of the hull and <strong>(B)</strong> how many minutes until the boat is completely submerged.
+          Find <strong>(A)</strong> the volume of the hull using the given cross-section and <strong>(B)</strong> how many minutes until the boat is completely submerged.
         </p>
         <div class="math-block">
-          <span class="part-label">Part A — Area</span>
-          A = ∫₀³ (9 − x²) dx<br><br>
-          <span class="part-label">Part B — Time to sink</span>
-          t = Volume ÷ inflow rate = 27 ÷ 0.9
+          <span class="part-label">Part A — Volume</span>
+         
+          <span class="part-label">Part B — Time until sunk</span>
+         
         </div>
         <p class="problem-text" style="font-size:0.875rem;color:var(--text-muted)">Select the pair that matches both calculations.</p>
         <ul class="options" id="opts-ch1"></ul>
@@ -114,21 +119,19 @@
       </figure>
 
       <div class="narrative">
-        Oh No! The boat slips under the water! Alex and Keyshawn leap out and try their luck swimming for the island.
-        In this instant, Alex is <em>80 m</em> from shore, swimming at <em>1.0 m/s</em>.
-        Keyshawn, thrown by a wave, is <em>50 m</em> from shore swimming at <em>1.4 m/s</em> toward land along the same path.
+        Oh No! The boat sank! Alex and Keyshawn leap out and try their luck swimming for the island.
+        Alex is <em>80 m</em> from shore, swimming at a pace of <em>1.0 m/s</em>.
+        Keyshawn, thrown by a wave, is <em>50 m</em> from shore while swimming at a pace of <em>1.4 m/s</em> toward land along the same path.
       
       </div>
 
       <div class="problem-card">
         <p class="problem-type">Related rates</p>
         <p class="problem-text">
-          Let <em>D(t)</em> be the distance between them. How fast is Keyshawn pulling away from Alex at this instant—that is, find <em>dD/dt</em>?
+          Let <em>D(x)</em> be the change in distance between them. How fast is Keyshawn pulling away from Alex at this instant? Find <em>dx/dt</em>.
         </p>
         <div class="math-block">
-          D = (distance of Alex from shore) − (distance of Keyshawn from shore)<br>
-          D = (80 − 1.0t) − (50 − 1.4t) = 30 + 0.4t<br>
-          Differentiate with respect to <em>t</em>.
+        
         </div>
         <ul class="options" id="opts-ch2"></ul>
         <div class="feedback wrong" id="fb-ch2"></div>
@@ -151,23 +154,17 @@
 
       <figure class="scenario-visual">
         <img src="assets/scenario-ch3-supplies.png" alt="Food supplies crate on a tropical island beach" width="640" height="360" />
-        <figcaption class="scenario-caption">F(t) = 150 − 6t² kg remaining after t days</figcaption>
       </figure>
 
       <div class="narrative">
-        They both crawl onto the abandoned island, soaked but alive. Upon the shore, they find a crate of supplies that holds exactly <em>150 kg</em> of food.
-        Their combined consumption, in kg, after <em>t</em> full days on the island is modelled by <em>C(t) = 6t²</em>.
-        When <em>F(t) = 0</em> they will die of starvation.
+        They both crawl onto the island, soaked but alive. Upon the shore, they miraculously find a crate of supplies that holds exactly <em>150 kg</em> of food.
+        The rate of their increase in combined consumption, in kg per day^2 after <em>t</em> full days on the island, is modelled by <em>C(t) = 12t</em>.
+        When <em>F(t) = 0</em>, they will die of starvation. What is the maximum number of days they can both survive for?
       </div>
 
       <div class="problem-card">
-        <p class="problem-type">Application of derivatives</p>
+        <p class="problem-type">Derivatives</p>
         <p class="problem-text">
-          Use <em>F(t) = 150 − 6t²</em>. First find <em>F′(t)</em> to describe how fast food is being consumed, then solve <em>F(t) = 0</em> for the number of days until the food runs out.
-        </p>
-        <div class="math-block">
-          F′(t) = d/dt (150 − 6t²) = −12t<br><br>
-          150 − 6t² = 0  →  t² = 25  →  t = ?
         </div>
         <ul class="options" id="opts-ch3"></ul>
         <div class="feedback wrong" id="fb-ch3"></div>
@@ -213,10 +210,10 @@
         fbId: "fb-ch2",
         failMsg: "They misjudged the gap between them and swam off course thanks to you. The island fades from view. Start again from the beach.",
         options: [
-          { label: "dD/dt = +0.4 m/s (Keyshawn pulls away at 0.4 m/s)", correct: true },
-          { label: "dD/dt = −0.4 m/s (they get closer)", correct: false },
-          { label: "dD/dt = −2.4 m/s", correct: false },
-          { label: "dD/dt = +2.4 m/s", correct: false }
+          { label: "dD/dt = 0.4 m/s (Keyshawn pulls away at 0.4 m/s)", correct: true },
+          { label: "dD/dt = -0.4 m/s (they get closer)", correct: false },
+          { label: "dD/dt = -2.4 m/s", correct: false },
+          { label: "dD/dt = 2.4 m/s", correct: false }
         ]
       },
       {
@@ -225,10 +222,10 @@
         fbId: "fb-ch3",
         failMsg: "They ran out of food early thanks to you. So close! Start again from the beach.",
         options: [
-          { label: "F′(t) = −12t; food lasts 5 days", correct: true },
-          { label: "F′(t) = 12t; food lasts 5 days", correct: false },
           { label: "F′(t) = −12t; food lasts 25 days", correct: false },
-          { label: "F′(t) = −6t; food lasts 5 days", correct: false }
+          { label: "F′(t) = 12t; food lasts 5 days", correct: false },
+          { label: "F′(t) = 6t^2; food lasts 25 days", correct: false },
+          { label: "F′(t) = −6t^2; food lasts 5 days", correct: true }
         ]
       }
     ];
