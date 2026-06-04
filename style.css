@@ -180,15 +180,6 @@ body {
   overflow: hidden;
 }
 
-.story-box::before {
-  content: "🌺";
-  position: absolute;
-  top: 0.5rem;
-  right: 0.75rem;
-  font-size: 1.25rem;
-  opacity: 0.6;
-}
-
 .story-box p {
   font-size: 0.9375rem;
   line-height: 1.7;
