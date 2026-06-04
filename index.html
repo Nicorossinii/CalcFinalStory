@@ -8,513 +8,12 @@
   <link rel="icon" type="image/x-icon" href="IMG_2075.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --ocean-deep: #0a2e36;
-      --ocean: #145a63;
-      --ocean-mid: #1e7a82;
-      --teal: #2a9d8f;
-      --teal-light: #52b8aa;
-      --sand: #c9a66b;
-      --sand-light: #e8d5b0;
-      --coral: #c45c4a;
-      --coral-dark: #9a4336;
-      --palm: #1a3d2f;
-      --surface: rgba(10, 30, 28, 0.92);
-      --surface-light: rgba(16, 45, 42, 0.94);
-      --text: #f4f7f5;
-      --text-muted: #b8cfc8;
-      --accent: #d4845a;
-      --accent-gold: #e8c872;
-      --correct: #3d9970;
-      --wrong: #c45c4a;
-      --radius: 12px;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: "Source Sans 3", system-ui, sans-serif;
-      background: var(--ocean-deep);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .rays {
-      pointer-events: none;
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .rays::before,
-    .rays::after {
-      content: "";
-      position: absolute;
-      width: 50%;
-      height: 50%;
-      opacity: 0.35;
-    }
-
-    .rays::before {
-      top: 0;
-      left: 0;
-      background: radial-gradient(ellipse at top left, rgba(42, 157, 143, 0.18), transparent 70%);
-    }
-
-    .rays::after {
-      bottom: 0;
-      right: 0;
-      background: radial-gradient(ellipse at bottom right, rgba(201, 166, 107, 0.12), transparent 70%);
-    }
-
-    .screen {
-      display: none;
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-    }
-
-    .screen.active { display: flex; flex-direction: column; }
-
-    /* ─── HOME ─── */
-    #screen-home {
-      align-items: stretch;
-    }
-
-    .home-hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      background: var(--ocean-deep) center/cover no-repeat;
-      background-image:
-        linear-gradient(180deg,
-          rgba(10, 46, 54, 0.45) 0%,
-          rgba(10, 35, 40, 0.65) 40%,
-          rgba(8, 28, 32, 0.94) 100%),
-        url("gettyimages-141810255-2048x2048.jpg");
-      background-size: cover;
-      background-position: center top;
-    }
-
-    .home-top {
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand {
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: 1.5rem;
-      letter-spacing: 0.02em;
-      color: var(--sand-light);
-    }
-
-    .chapter-pill {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      background: rgba(42, 157, 143, 0.18);
-      border: 1px solid rgba(82, 184, 170, 0.45);
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      color: var(--teal-light);
-    }
-
-    .home-content {
-      padding: 2rem 1.5rem 3rem;
-      max-width: 640px;
-      margin: 0 auto;
-      width: 100%;
-      text-align: center;
-    }
-
-    .home-content h1 {
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: clamp(2rem, 7vw, 3rem);
-      line-height: 1.15;
-      color: var(--text);
-      margin-bottom: 1rem;
-      font-weight: 400;
-    }
-
-    .home-content .tagline {
-      font-size: 1.0625rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      line-height: 1.65;
-    }
-
-    .story-box {
-      background: var(--surface);
-      border: 1px solid rgba(82, 184, 170, 0.3);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
-      text-align: left;
-      margin-bottom: 1.75rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
-
-    .story-box p {
-      font-size: 0.9375rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-    }
-
-    .story-box strong { color: var(--accent-gold); }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      font-family: "Source Sans 3", sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      padding: 0.875rem 2rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
-      text-transform: uppercase;
-    }
-
-    .btn:active { transform: scale(0.98); }
-
-    .btn-primary {
-      background: linear-gradient(180deg, var(--teal) 0%, var(--ocean-mid) 100%);
-      color: var(--text);
-      box-shadow: 0 4px 14px rgba(10, 46, 54, 0.5);
-      border: 1px solid rgba(82, 184, 170, 0.35);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(180deg, var(--teal-light) 0%, var(--teal) 100%);
-      box-shadow: 0 6px 20px rgba(42, 157, 143, 0.35);
-      transform: translateY(-1px);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--teal-light);
-      font-size: 0.875rem;
-      font-weight: 600;
-      padding: 0.5rem;
-      margin-top: 1rem;
-      letter-spacing: 0;
-      text-transform: none;
-      box-shadow: none;
-      border: none;
-    }
-
-    .btn-ghost:hover { color: var(--sand-light); }
-
-    .audio-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      z-index: 100;
-      width: 2.5rem;
-      height: 2.5rem;
-      border-radius: 50%;
-      border: 1px solid rgba(82, 184, 170, 0.4);
-      background: var(--surface);
-      color: var(--teal-light);
-      cursor: pointer;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .audio-toggle:hover {
-      background: rgba(42, 157, 143, 0.25);
-      color: var(--text);
-    }
-
-    .audio-toggle.muted { opacity: 0.6; }
-
-    /* Failure banner */
-    .fail-banner {
-      display: none;
-      background: linear-gradient(90deg, rgba(196, 92, 74, 0.2), rgba(196, 92, 74, 0.08));
-      border: 1px solid var(--wrong);
-      border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      margin-bottom: 1.25rem;
-      text-align: left;
-      animation: shake 0.5s ease;
-    }
-
-    .fail-banner.visible { display: block; }
-
-    .fail-banner h3 {
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: 1.25rem;
-      color: #f0b8ae;
-      margin-bottom: 0.35rem;
-    }
-
-    .fail-banner p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20% { transform: translateX(-6px); }
-      40% { transform: translateX(6px); }
-      60% { transform: translateX(-4px); }
-      80% { transform: translateX(4px); }
-    }
-
-    /* ─── CHAPTER SCREENS ─── */
-    .chapter-wrap {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      max-width: 720px;
-      margin: 0 auto;
-      width: 100%;
-      padding: 1.25rem 1.25rem 2.5rem;
-    }
-
-    .chapter-header {
-      margin-bottom: 1.25rem;
-    }
-
-    .chapter-label {
-      font-size: 0.6875rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--teal-light);
-      margin-bottom: 0.35rem;
-    }
-
-    .chapter-title {
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: clamp(1.75rem, 5vw, 2.25rem);
-      color: var(--sand-light);
-      font-weight: 400;
-    }
-
-    .progress-steps {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-
-    .step-dot {
-      flex: 1;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.15);
-      transition: background 0.3s;
-    }
-
-    .step-dot.done { background: var(--correct); }
-    .step-dot.current { background: var(--teal-light); box-shadow: 0 0 10px rgba(82, 184, 170, 0.5); }
-
-    .narrative {
-      background: var(--surface);
-      border-left: 4px solid var(--teal);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      padding: 1.125rem 1.25rem;
-      margin-bottom: 1.25rem;
-      font-size: 0.9375rem;
-      line-height: 1.75;
-      color: var(--text-muted);
-    }
-
-    .narrative em { color: var(--accent-gold); font-style: normal; font-weight: 700; }
-
-    .problem-card {
-      background: var(--surface-light);
-      border: 1px solid rgba(82, 184, 170, 0.25);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    .problem-type {
-      font-size: 0.6875rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--sand);
-      margin-bottom: 0.5rem;
-    }
-
-    .problem-text {
-      font-size: 1rem;
-      line-height: 1.65;
-      margin-bottom: 0.75rem;
-    }
-
-    .math-block {
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-      padding: 1rem 1.125rem;
-      font-family: "Cambria Math", "Times New Roman", serif;
-      font-size: 1.05rem;
-      margin: 1rem 0;
-      line-height: 1.8;
-      color: var(--text);
-      border: 1px solid rgba(82, 184, 170, 0.2);
-    }
-
-    .math-block .part-label {
-      font-family: "Source Sans 3", sans-serif;
-      font-size: 0.6875rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--teal-light);
-      display: block;
-      margin-bottom: 0.35rem;
-    }
-
-    .options {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.625rem;
-      margin-top: 1.25rem;
-    }
-
-    .option-btn {
-      width: 100%;
-      text-align: left;
-      padding: 1rem 1.125rem;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(82, 184, 170, 0.25);
-      border-radius: 8px;
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.9375rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s, transform 0.15s;
-    }
-
-    .option-btn:hover {
-      border-color: var(--teal-light);
-      background: rgba(42, 157, 143, 0.12);
-      transform: translateX(3px);
-    }
-
-    .option-btn .letter {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.625rem;
-      height: 1.625rem;
-      border-radius: 6px;
-      background: var(--ocean-mid);
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-right: 0.625rem;
-      color: var(--sand-light);
-    }
-
-    .feedback {
-      margin-top: 1rem;
-      padding: 0.875rem 1rem;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      display: none;
-    }
-
-    .feedback.show { display: block; }
-
-    .feedback.wrong {
-      background: rgba(196, 92, 74, 0.15);
-      border: 1px solid var(--wrong);
-      color: #f0c4bc;
-    }
-
-    .feedback.right {
-      background: rgba(61, 153, 112, 0.15);
-      border: 1px solid var(--correct);
-      color: #b8e0cc;
-    }
-
-    /* ─── VICTORY ─── */
-    #screen-victory {
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(42, 157, 143, 0.15), transparent 55%),
-        var(--ocean-deep);
-    }
-
-    .victory-card {
-      max-width: 520px;
-      background: var(--surface);
-      border: 1px solid rgba(232, 200, 114, 0.4);
-      border-radius: var(--radius);
-      padding: 2.5rem 2rem;
-      box-shadow: 0 0 40px rgba(10, 46, 54, 0.5);
-    }
-
-    .victory-card h2 {
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: 2.25rem;
-      color: var(--sand-light);
-      margin-bottom: 1rem;
-      font-weight: 400;
-    }
-
-    .victory-card p {
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
-
-    .wave-deco {
-      font-size: 2rem;
-      letter-spacing: 0.25em;
-      color: var(--teal-light);
-      margin-bottom: 1rem;
-      animation: wave 2s ease-in-out infinite;
-    }
-
-    #screen-ch1,
-    #screen-ch2,
-    #screen-ch3 {
-      background:
-        linear-gradient(180deg, rgba(10, 46, 54, 0.88) 0%, rgba(8, 28, 32, 0.96) 100%),
-        url("gettyimages-141810255-2048x2048.jpg") center top / cover no-repeat fixed;
-    }
-
-    @keyframes wave {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    @media (max-width: 480px) {
-      .home-hero { background-position: center 20%; }
-      .problem-card { padding: 1.125rem; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito:wght@400;600;700;800&family=Pacifico&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="rays" aria-hidden="true"></div>
+  <div class="tropical-bg" aria-hidden="true"></div>
+  <span class="palm-deco palm-deco--left" aria-hidden="true">🌴</span>
+  <span class="palm-deco palm-deco--right" aria-hidden="true">🌴</span>
 
   <audio id="bg-music" loop preload="auto">
     <source src="1-18. Sweden.mp3" type="audio/mpeg" />
@@ -524,6 +23,14 @@
   </audio>
 
   <button type="button" class="audio-toggle" id="btn-audio" aria-label="Toggle music" title="Toggle music">♪</button>
+
+  <div class="success-overlay" id="success-overlay" role="dialog" aria-labelledby="success-title" aria-hidden="true">
+    <div class="success-card">
+      <h3 id="success-title">Correct! 🌺</h3>
+      <img src="assets/reward.png" alt="Celebration" width="320" height="480" />
+      <p id="success-message">The island adventure continues...</p>
+    </div>
+  </div>
 
   <!-- HOME -->
   <section class="screen active" id="screen-home">
@@ -538,7 +45,7 @@
           <p id="fail-message">A wrong answer sent Alex and Keyshawn back to the beginning. Read the story, work through the calculus carefully, and try again.</p>
         </div>
         <h1>Survive the Sine Wave</h1>
-        <p class="tagline">One story. Three calculus challenges. Answer every question correctly—or start over.</p>
+        <p class="tagline">One tropical tale. Three calculus challenges. Answer every question correctly—or wash back to shore.</p>
         <div class="story-box">
           <p>
             <strong>Alex</strong> and <strong>Keyshawn</strong> are adrift in a small rowboat when they spot an abandoned island on the horizon.
@@ -547,7 +54,6 @@
           </p>
         </div>
         <button type="button" class="btn btn-primary" id="btn-begin">Begin the story</button>
-        <button type="button" class="btn btn-ghost" id="btn-reset" hidden>Start over</button>
       </div>
     </div>
   </section>
@@ -564,6 +70,11 @@
           <span class="step-dot"></span>
         </div>
       </header>
+
+      <figure class="scenario-visual">
+        <img src="assets/scenario-ch1-boat.png" alt="Rowboat taking on water near a tropical island" width="640" height="360" />
+        <figcaption class="scenario-caption">Hull profile y = 9 − x² · water inflow 0.9 m³/min</figcaption>
+      </figure>
 
       <div class="narrative">
         Alex and Keyshawn cling to their rowboat as waves slap the sides. Through the spray they see the island—but a jagged hole in the hull gurgles below the waterline.
@@ -602,6 +113,11 @@
         </div>
       </header>
 
+      <figure class="scenario-visual">
+        <img src="assets/scenario-ch2-swim.png" alt="Two swimmers racing toward a tropical beach" width="640" height="360" />
+        <figcaption class="scenario-caption">Alex 80 m @ 1.0 m/s · Keyshawn 50 m @ 1.4 m/s</figcaption>
+      </figure>
+
       <div class="narrative">
         The boat slips under. Alex and Keyshawn strike out for the island. The shore is a straight line; distance from shore is measured in metres.
         At this instant, Alex is <em>80 m</em> from shore swimming at <em>1.0 m/s</em> toward land.
@@ -638,6 +154,11 @@
         </div>
       </header>
 
+      <figure class="scenario-visual">
+        <img src="assets/scenario-ch3-supplies.png" alt="Food supplies crate on a tropical island beach" width="640" height="360" />
+        <figcaption class="scenario-caption">F(t) = 150 − 6t² kg remaining after t days</figcaption>
+      </figure>
+
       <div class="narrative">
         They crawl onto the abandoned island, soaked but alive. A crate of supplies holds exactly <em>150 kg</em> of food.
         Their combined consumption (in kg) after <em>t</em> full days on the island is modelled by <em>C(t) = 6t²</em>, so food remaining is <em>F(t) = 150 − 6t²</em>.
@@ -662,8 +183,11 @@
   <!-- VICTORY -->
   <section class="screen" id="screen-victory">
     <div class="victory-card">
-      <div class="wave-deco">∿∿∿∿∿</div>
+      <div class="wave-deco">🌊🌴🌺🌴🌊</div>
       <h2>Island Conquered!</h2>
+      <figure class="victory-reward">
+        <img src="assets/reward.png" alt="Celebration" width="320" height="480" />
+      </figure>
       <p>
         Alex and Keyshawn made it—thanks to limits, integrals, related rates, and derivatives wielded at exactly the right moments.
         The abandoned island is theirs. For now.
@@ -715,14 +239,31 @@
     ];
 
     const LETTERS = ["A", "B", "C", "D"];
+    const SUCCESS_MESSAGES = [
+      "Chapter 1 cleared—the boat math checks out!",
+      "Chapter 2 cleared—they're closing in on shore!",
+      "Chapter 3 cleared—the island is secure!"
+    ];
+
+    const shuffledByChapter = CHAPTERS.map(() => []);
 
     const bgMusic = document.getElementById("bg-music");
     const clickSound = document.getElementById("click-sound");
     const btnAudio = document.getElementById("btn-audio");
+    const successOverlay = document.getElementById("success-overlay");
     let musicEnabled = true;
 
     bgMusic.volume = 0.35;
     clickSound.volume = 0.5;
+
+    function shuffleArray(items) {
+      const arr = items.slice();
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
 
     function playClickSound() {
       clickSound.currentTime = 0;
@@ -776,16 +317,28 @@
       window.scrollTo(0, 0);
     }
 
+    function showSuccessReward(chapterIndex) {
+      document.getElementById("success-message").textContent =
+        SUCCESS_MESSAGES[chapterIndex] || "Correct! The story continues...";
+      successOverlay.classList.add("visible");
+      successOverlay.setAttribute("aria-hidden", "false");
+    }
+
+    function hideSuccessReward() {
+      successOverlay.classList.remove("visible");
+      successOverlay.setAttribute("aria-hidden", "true");
+    }
+
     function updateHomeProgress() {
       const completed = isQuizCompleted();
       document.getElementById("home-progress").textContent =
-        completed ? "Complete!" : "Chapter 0 / 3";
-      document.getElementById("btn-reset").hidden = !completed;
+        completed ? "Complete! 🏝️" : "Chapter 0 / 3";
       document.getElementById("btn-begin").textContent =
         completed ? "Play again" : "Begin the story";
     }
 
     function goHome(showFail, message) {
+      hideSuccessReward();
       showScreen("screen-home");
       const banner = document.getElementById("fail-banner");
       if (showFail) {
@@ -802,6 +355,7 @@
     function failAndRestart(message) {
       currentChapter = 0;
       clearSavedProgress();
+      hideSuccessReward();
       setTimeout(() => goHome(true, message), 1400);
     }
 
@@ -812,38 +366,44 @@
       ul.innerHTML = "";
       fb.classList.remove("show", "wrong", "right");
 
-      ch.options.forEach((opt, i) => {
+      shuffledByChapter[chapterIndex] = shuffleArray(ch.options);
+
+      shuffledByChapter[chapterIndex].forEach((opt, i) => {
         const li = document.createElement("li");
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "option-btn";
         btn.innerHTML = `<span class="letter">${LETTERS[i]}</span>${opt.label}`;
-        btn.addEventListener("click", () => handleAnswer(chapterIndex, i, opt.correct, btn));
+        btn.addEventListener("click", () => handleAnswer(chapterIndex, opt.correct, btn));
         bindClickSound(btn);
         li.appendChild(btn);
         ul.appendChild(li);
       });
     }
 
-    function handleAnswer(chapterIndex, choiceIndex, isCorrect, btn) {
+    function advanceAfterSuccess(chapterIndex) {
+      hideSuccessReward();
+      if (chapterIndex < CHAPTERS.length - 1) {
+        currentChapter = chapterIndex + 1;
+        showScreen(CHAPTERS[currentChapter].screen);
+        renderOptions(currentChapter);
+      } else {
+        markQuizCompleted();
+        showScreen("screen-victory");
+      }
+    }
+
+    function handleAnswer(chapterIndex, isCorrect, btn) {
       const ch = CHAPTERS[chapterIndex];
       const fb = document.getElementById(ch.fbId);
       const buttons = document.getElementById(ch.optsId).querySelectorAll(".option-btn");
       buttons.forEach(b => { b.disabled = true; b.style.pointerEvents = "none"; });
 
       if (isCorrect) {
-        fb.textContent = "Correct! The story continues...";
+        fb.textContent = "Correct! 🌺";
         fb.className = "feedback right show";
-        setTimeout(() => {
-          if (chapterIndex < CHAPTERS.length - 1) {
-            currentChapter = chapterIndex + 1;
-            showScreen(CHAPTERS[currentChapter].screen);
-            renderOptions(currentChapter);
-          } else {
-            markQuizCompleted();
-            showScreen("screen-victory");
-          }
-        }, 1100);
+        showSuccessReward(chapterIndex);
+        setTimeout(() => advanceAfterSuccess(chapterIndex), 2200);
       } else {
         fb.textContent = "That's not right. The waves take them back...";
         fb.className = "feedback wrong show";
@@ -853,6 +413,7 @@
 
     function beginStory() {
       failReturn = false;
+      hideSuccessReward();
       document.getElementById("fail-banner").classList.remove("visible");
       if (isQuizCompleted()) {
         clearSavedProgress();
@@ -863,13 +424,6 @@
     }
 
     document.getElementById("btn-begin").addEventListener("click", beginStory);
-
-    document.getElementById("btn-reset").addEventListener("click", () => {
-      clearSavedProgress();
-      failReturn = false;
-      document.getElementById("fail-banner").classList.remove("visible");
-      updateHomeProgress();
-    });
 
     document.getElementById("btn-play-again").addEventListener("click", () => {
       clearSavedProgress();
