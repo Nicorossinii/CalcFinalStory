@@ -410,24 +410,247 @@ body:has(#screen-home.active) .audio-toggle {
   75% { transform: translateX(-4px); }
 }
 
+/* ─── MINECRAFT WORLD (chapter backgrounds) ─── */
+#screen-ch1,
+#screen-ch2,
+#screen-ch3 {
+  background-color: #78c8ff;
+  overflow: hidden;
+}
+
+.mc-world {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: #78c8ff;
+  animation: mc-sky-shift 12s steps(6) infinite;
+}
+
+@keyframes mc-sky-shift {
+  0%, 100% { background-color: #78c8ff; }
+  50% { background-color: #8ad4ff; }
+}
+
+.mc-sun {
+  position: absolute;
+  top: 3.5rem;
+  right: 12%;
+  width: 56px;
+  height: 56px;
+  background-color: #f8e038;
+  box-shadow:
+    8px 0 0 #f0d030,
+    0 8px 0 #f0d030,
+    8px 8px 0 #e8c820;
+  animation: mc-sun-pulse 4s steps(2) infinite;
+}
+
+@keyframes mc-sun-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.mc-cloud {
+  position: absolute;
+  width: 48px;
+  height: 16px;
+  background-color: #ffffff;
+  box-shadow:
+    -16px 8px 0 #ffffff,
+    16px 8px 0 #ffffff,
+    -8px -8px 0 #ffffff,
+    8px -8px 0 #ffffff,
+    0 -16px 0 #ffffff;
+  opacity: 0.95;
+}
+
+.mc-cloud--1 {
+  top: 14%;
+  left: -160px;
+  animation: mc-cloud-drift 32s linear infinite;
+}
+
+.mc-cloud--2 {
+  top: 22%;
+  left: -240px;
+  animation: mc-cloud-drift-2 24s linear infinite;
+  animation-delay: -10s;
+}
+
+.mc-cloud--3 {
+  top: 8%;
+  left: -120px;
+  animation: mc-cloud-drift-3 40s linear infinite;
+  animation-delay: -20s;
+}
+
+@keyframes mc-cloud-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 320px)); }
+}
+
+@keyframes mc-cloud-drift-2 {
+  from { transform: translateX(0) scale(0.8); }
+  to { transform: translateX(calc(100vw + 320px)) scale(0.8); }
+}
+
+@keyframes mc-cloud-drift-3 {
+  from { transform: translateX(0) scale(1.15); }
+  to { transform: translateX(calc(100vw + 320px)) scale(1.15); }
+}
+
+.mc-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+}
+
+.mc-ground::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background-color: #8b6914;
+  border-top: 4px solid #6b5010;
+  box-shadow:
+    0 -48px 0 0 #5dba48,
+    0 -52px 0 0 #4a9040,
+    0 -56px 0 0 #3d7a35;
+}
+
+.mc-ground::after {
+  content: "";
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background-color: transparent;
+  box-shadow:
+    16px 0 0 8px #5dba48,
+    64px 0 0 8px #4a9040,
+    128px 0 0 8px #5dba48,
+    200px 0 0 8px #4a9040,
+    280px 0 0 8px #5dba48,
+    360px 0 0 8px #4a9040,
+    440px 0 0 8px #5dba48,
+    520px 0 0 8px #4a9040,
+    600px 0 0 8px #5dba48,
+    680px 0 0 8px #4a9040,
+    760px 0 0 8px #5dba48;
+}
+
+.mc-tree {
+  position: absolute;
+  bottom: 48px;
+  width: 12px;
+  height: 40px;
+  background-color: #6b4a2e;
+  box-shadow: 2px 0 0 #5a3d26;
+}
+
+.mc-tree::before {
+  content: "";
+  position: absolute;
+  bottom: 28px;
+  left: -18px;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  box-shadow:
+    0 0 0 12px #3d8b37,
+    12px 0 0 12px #4a9a44,
+    24px 0 0 12px #3d8b37,
+    0 -12px 0 12px #5cb850,
+    12px -12px 0 12px #4a9a44,
+    24px -12px 0 12px #3d8b37,
+    0 -24px 0 12px #4a9a44,
+    12px -24px 0 12px #5cb850,
+    24px -24px 0 12px #4a9a44;
+}
+
+.mc-tree:nth-child(1) { left: 6%; }
+.mc-tree:nth-child(2) { left: 20%; bottom: 48px; transform: scale(0.85); }
+.mc-tree:nth-child(3) { left: 68%; }
+.mc-tree:nth-child(4) { left: 84%; transform: scale(0.9); }
+.mc-tree:nth-child(5) { left: 42%; }
+
+.mc-tree--tall {
+  height: 52px;
+  bottom: 48px;
+}
+
+.mc-tree--tall::before {
+  bottom: 36px;
+  box-shadow:
+    0 0 0 12px #3d8b37,
+    12px 0 0 12px #4a9a44,
+    24px 0 0 12px #3d8b37,
+    0 -12px 0 12px #5cb850,
+    12px -12px 0 12px #4a9a44,
+    24px -12px 0 12px #3d8b37,
+    0 -24px 0 12px #4a9a44,
+    12px -24px 0 12px #5cb850,
+    24px -24px 0 12px #4a9a44,
+    0 -36px 0 12px #3d8b37,
+    12px -36px 0 12px #4a9a44,
+    24px -36px 0 12px #3d8b37;
+}
+
+.mc-tree--wide::before {
+  left: -24px;
+  width: 60px;
+  box-shadow:
+    0 0 0 12px #3d8b37,
+    12px 0 0 12px #4a9a44,
+    24px 0 0 12px #3d8b37,
+    36px 0 0 12px #4a9a44,
+    0 -12px 0 12px #5cb850,
+    12px -12px 0 12px #4a9a44,
+    24px -12px 0 12px #3d8b37,
+    36px -12px 0 12px #5cb850,
+    0 -24px 0 12px #4a9a44,
+    12px -24px 0 12px #5cb850,
+    24px -24px 0 12px #4a9a44,
+    36px -24px 0 12px #3d8b37;
+}
+
 /* ─── CHAPTERS ─── */
 .chapter-wrap {
+  position: relative;
+  z-index: 2;
   flex: 1;
   display: flex;
   flex-direction: column;
   max-width: 780px;
   margin: 0 auto;
   width: 100%;
-  padding: 1.5rem 1.25rem 2.5rem;
+  padding: 1.5rem 1.25rem 10rem;
+}
+
+body:has(#screen-ch1.active) .tropical-bg,
+body:has(#screen-ch2.active) .tropical-bg,
+body:has(#screen-ch3.active) .tropical-bg,
+body:has(#screen-ch1.active) .palm-deco,
+body:has(#screen-ch2.active) .palm-deco,
+body:has(#screen-ch3.active) .palm-deco {
+  visibility: hidden;
 }
 
 .chapter-header {
   margin-bottom: 1.5rem;
-  padding: 1.25rem;
-  background-color: #ff6b35;
-  border: 4px solid;
-  border-color: #ffaa77 #cc4400 #cc4400 #ffaa77;
-  box-shadow: var(--pixel-shadow);
+  padding: 1rem;
+  background-color: rgba(198, 198, 198, 0.94);
+  border: 4px solid #000000;
+  box-shadow:
+    inset 3px 3px 0 #ffffff,
+    inset -3px -3px 0 #555555,
+    4px 4px 0 rgba(0, 0, 0, 0.45);
 }
 
 .chapter-label {
@@ -435,7 +658,7 @@ body:has(#screen-home.active) .audio-toggle {
   font-size: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--gold);
+  color: #555555;
   margin-bottom: 0.75rem;
   line-height: 1.6;
 }
@@ -443,9 +666,9 @@ body:has(#screen-home.active) .audio-toggle {
 .chapter-title {
   font-family: "Press Start 2P", monospace;
   font-size: clamp(0.75rem, 3.8vw, 1.1rem);
-  color: #ffffff;
+  color: #1a1a1a;
   line-height: 1.7;
-  text-shadow: 2px 2px 0 #000000, 4px 4px 0 var(--lapis);
+  text-shadow: 1px 1px 0 #ffffff;
 }
 
 .progress-steps {
@@ -478,20 +701,21 @@ body:has(#screen-home.active) .audio-toggle {
 }
 
 .narrative {
-  background-color: #1a6b5c;
-  border: 4px solid;
-  border-left: 8px solid var(--lime);
-  border-color: #3dd9b8 #0d4a3d #0d4a3d var(--lime);
+  background-color: rgba(198, 198, 198, 0.92);
+  border: 4px solid #000000;
   padding: 1.35rem 1.5rem;
   margin-bottom: 1.5rem;
   font-size: 1.45rem;
   line-height: 1.55;
-  color: #e8fff5;
-  box-shadow: var(--pixel-shadow);
+  color: #1a1a1a;
+  box-shadow:
+    inset 3px 3px 0 #ffffff,
+    inset -3px -3px 0 #555555,
+    4px 4px 0 rgba(0, 0, 0, 0.4);
 }
 
 .narrative em {
-  color: var(--diamond);
+  color: #3366cc;
   font-style: normal;
   font-weight: 700;
 }
@@ -527,50 +751,78 @@ body:has(#screen-home.active) .audio-toggle {
   border-top: 4px solid #000000;
 }
 
+/* Minecraft inventory-style question panel */
 .problem-card {
-  background-color: #fff5c0;
-  border: 4px solid;
-  border-color: var(--gold) #c9a600 #c9a600 var(--gold);
-  padding: 1.85rem;
-  box-shadow: var(--pixel-shadow);
-  color: var(--text-dark);
+  --inv-slot: #8b8b8b;
+  --inv-slot-dark: #373737;
+  --inv-slot-light: #dbdbdb;
+  background-color: #c6c6c6;
+  border: 4px solid #000000;
+  padding: 0.5rem;
+  box-shadow:
+    inset 4px 4px 0 #ffffff,
+    inset -4px -4px 0 #555555,
+    6px 6px 0 rgba(0, 0, 0, 0.5);
+  color: #2d2d2d;
+  position: relative;
+}
+
+.problem-card::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 2px solid #555555;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.problem-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .problem-type {
   font-family: "Press Start 2P", monospace;
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #cc2200;
-  margin-bottom: 1rem;
+  color: #404040;
+  margin-bottom: 0.85rem;
+  padding: 0.5rem 0.65rem;
   line-height: 1.6;
+  background-color: #a0a0a0;
+  border: 2px solid;
+  border-color: var(--inv-slot-light) var(--inv-slot-dark) var(--inv-slot-dark) var(--inv-slot-light);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .problem-text {
   font-size: 1.5rem;
   line-height: 1.55;
   margin-bottom: 1rem;
-  color: var(--text-dark);
+  color: #1a1a1a;
+  padding: 0 0.35rem;
 }
 
 .math-block {
-  background-color: #1a1a5e;
-  padding: 1.25rem 1.35rem;
+  background-color: var(--inv-slot);
+  padding: 1rem 1.15rem;
   font-family: "VT323", "Courier New", monospace;
   font-size: 1.55rem;
-  margin: 1.15rem 0;
+  margin: 1rem 0;
   line-height: 1.6;
-  color: var(--diamond);
-  border: 4px solid var(--lapis);
-  box-shadow: inset 0 0 0 2px #000000;
+  color: #ffffff;
+  border: 2px solid;
+  border-color: var(--inv-slot-dark) #000000 #000000 var(--inv-slot-dark);
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.45);
 }
 
 .math-block .part-label {
   font-family: "Press Start 2P", monospace;
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--lime);
+  color: #e0e0e0;
   display: block;
   margin-bottom: 0.6rem;
   line-height: 1.6;
@@ -580,39 +832,46 @@ body:has(#screen-home.active) .audio-toggle {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  margin-top: 1.5rem;
+  gap: 6px;
+  margin-top: 1.25rem;
+  padding: 6px;
+  background-color: #a0a0a0;
+  border: 2px solid;
+  border-color: var(--inv-slot-dark) #000000 #000000 var(--inv-slot-dark);
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.35);
 }
 
 .option-btn {
   width: 100%;
   text-align: left;
-  padding: 1.25rem 1.35rem;
-  background-color: #b8e0ff;
-  border: 4px solid;
-  border-color: #e0f4ff #4488cc #4488cc #e0f4ff;
-  color: var(--text-dark);
+  padding: 0.85rem 1rem;
+  min-height: 52px;
+  background-color: var(--inv-slot);
+  border: 2px solid;
+  border-color: var(--inv-slot-light) var(--inv-slot-dark) var(--inv-slot-dark) var(--inv-slot-light);
+  color: #ffffff;
   font-family: "VT323", monospace;
   font-size: 1.45rem;
-  line-height: 1.45;
+  line-height: 1.4;
   cursor: pointer;
-  box-shadow: 3px 3px 0 #000000;
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.35);
+  text-shadow: 1px 1px 0 #000000;
 }
 
-.options li:nth-child(1) .option-btn { background-color: #b8e0ff; border-color: #e0f4ff #4488cc #4488cc #e0f4ff; }
-.options li:nth-child(2) .option-btn { background-color: #ffc8e8; border-color: #ffe0f4 #cc4488 #cc4488 #ffe0f4; }
-.options li:nth-child(3) .option-btn { background-color: #c8ffb8; border-color: #e8ffe0 #44aa44 #44aa44 #e8ffe0; }
-.options li:nth-child(4) .option-btn { background-color: #ffe8b8; border-color: #fff4e0 #cc8800 #cc8800 #fff4e0; }
-
 .option-btn:hover:not(:disabled) {
-  border-color: var(--gold) #8a7000 #8a7000 var(--gold);
-  background-color: #fff8d0;
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 #000000;
+  background-color: #9a9aa2;
+  border-color: #ffffff #555555 #555555 #ffffff;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.25), inset -1px -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.option-btn:active:not(:disabled) {
+  border-color: var(--inv-slot-dark) var(--inv-slot-light) var(--inv-slot-light) var(--inv-slot-dark);
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.5);
+  transform: translate(1px, 1px);
 }
 
 .option-btn:disabled {
-  opacity: 0.65;
+  opacity: 0.7;
   cursor: default;
 }
 
@@ -620,15 +879,17 @@ body:has(#screen-home.active) .audio-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.1rem;
-  height: 2.1rem;
-  background-color: #3366ff;
-  border: 3px solid #000000;
+  width: 2rem;
+  height: 2rem;
+  background-color: #555555;
+  border: 2px solid;
+  border-color: #888888 #222222 #222222 #888888;
   font-family: "Press Start 2P", monospace;
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   margin-right: 0.75rem;
-  color: var(--gold);
+  color: #ffffff;
   vertical-align: middle;
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.4);
 }
 
 .feedback {
@@ -658,7 +919,7 @@ body:has(#screen-home.active) .audio-toggle {
   color: #7dffb0;
 }
 
-/* Success reward overlay */
+/* Success reward overlay — inventory popup */
 .success-overlay {
   position: fixed;
   inset: 0;
@@ -667,7 +928,7 @@ body:has(#screen-home.active) .audio-toggle {
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  background-color: rgba(26, 15, 46, 0.9);
+  background-color: rgba(0, 0, 0, 0.55);
   animation: fadeIn 0.35s steps(4);
 }
 
@@ -676,15 +937,31 @@ body:has(#screen-home.active) .audio-toggle {
 }
 
 .success-card {
-  max-width: 360px;
+  max-width: 380px;
   width: 100%;
   text-align: center;
-  background-color: var(--gui-bg);
-  border: 4px solid;
-  border-color: var(--gold) #8a7000 #8a7000 var(--gold);
-  padding: 1.5rem;
-  box-shadow: 8px 8px 0 #000000;
+  background-color: #c6c6c6;
+  border: 4px solid #000000;
+  padding: 0.5rem;
+  box-shadow:
+    inset 4px 4px 0 #ffffff,
+    inset -4px -4px 0 #555555,
+    8px 8px 0 rgba(0, 0, 0, 0.6);
   animation: card-pop 0.4s steps(4);
+}
+
+.success-card {
+  position: relative;
+}
+
+.success-card::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 4px;
+  border: 2px solid #555555;
+  pointer-events: none;
+  z-index: 0;
 }
 
 @keyframes card-pop {
@@ -694,25 +971,38 @@ body:has(#screen-home.active) .audio-toggle {
 
 .success-card h3 {
   font-family: "Press Start 2P", monospace;
-  font-size: 0.75rem;
-  color: var(--wood-dark);
+  font-size: 0.65rem;
+  color: #2d2d2d;
   margin-bottom: 0.75rem;
+  padding: 0.5rem;
   line-height: 1.6;
+  background-color: #a0a0a0;
+  border: 2px solid;
+  border-color: #dbdbdb #373737 #373737 #dbdbdb;
+  position: relative;
+  z-index: 1;
 }
 
 .success-card img {
   width: 100%;
   max-height: 420px;
   object-fit: contain;
-  border: 4px solid #000000;
-  background-color: transparent;
+  border: 2px solid;
+  border-color: #373737 #dbdbdb #dbdbdb #373737;
+  background-color: #8b8b8b;
   image-rendering: pixelated;
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
 }
 
 .success-card p {
   margin-top: 0.75rem;
-  font-size: 1.1rem;
-  color: var(--text-dark);
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  padding: 0.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes fadeIn {
@@ -791,56 +1081,6 @@ body:has(#screen-home.active) .audio-toggle {
   66% { color: var(--gold); transform: translateY(-8px); }
 }
 
-#screen-ch1 {
-  background-color: #2a5a8a;
-  border-top: 6px solid var(--diamond);
-}
-
-#screen-ch2 {
-  background-color: #5a2a6a;
-  border-top: 6px solid var(--coral);
-}
-
-#screen-ch3 {
-  background-color: #2a6a4a;
-  border-top: 6px solid var(--lime);
-}
-
-/* Floating ore particles */
-#screen-ch1::before,
-#screen-ch2::before,
-#screen-ch3::before {
-  content: "◆";
-  position: fixed;
-  top: 15%;
-  right: 10%;
-  font-size: 1rem;
-  color: var(--diamond);
-  opacity: 0.4;
-  animation: ore-float 4s steps(4) infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-#screen-ch2::before {
-  color: var(--gold);
-  top: 25%;
-  right: 85%;
-  animation-delay: -1.5s;
-}
-
-#screen-ch3::before {
-  color: var(--emerald);
-  top: 40%;
-  right: 15%;
-  animation-delay: -3s;
-}
-
-@keyframes ore-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-  50% { transform: translateY(-16px) rotate(90deg); opacity: 0.7; }
-}
-
 @media (max-width: 480px) {
   :root {
     --banner-height: 4rem;
@@ -854,8 +1094,30 @@ body:has(#screen-home.active) .audio-toggle {
     padding-bottom: 3rem;
   }
 
+  .chapter-wrap {
+    padding-bottom: 8rem;
+  }
+
+  .mc-sun {
+    width: 40px;
+    height: 40px;
+    box-shadow:
+      6px 0 0 #f0d030,
+      0 6px 0 #f0d030,
+      6px 6px 0 #e8c820;
+  }
+
+  .mc-ground {
+    height: 100px;
+  }
+
+  .mc-tree::before {
+    left: -14px;
+    width: 40px;
+  }
+
   .problem-card {
-    padding: 1.35rem;
+    padding: 0.4rem;
   }
 
   .problem-text {
