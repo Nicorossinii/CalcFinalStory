@@ -628,7 +628,7 @@ body:has(#screen-home.active) .audio-toggle {
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 780px;
+  max-width: 920px;
   margin: 0 auto;
   width: 100%;
   padding: 1.5rem 1.25rem 10rem;
@@ -734,9 +734,8 @@ body:has(#screen-ch4.active) .palm-deco {
 .scenario-visual img {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 220px;
-  object-fit: cover;
+  height: clamp(320px, 52vw, 520px);
+  object-fit: contain;
   object-position: center;
   image-rendering: pixelated;
 }
@@ -1133,7 +1132,7 @@ body:has(#screen-ch4.active) .palm-deco {
   }
 
   .scenario-visual img {
-    max-height: 180px;
+    height: clamp(280px, 80vw, 420px);
   }
 
   .brand {
