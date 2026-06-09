@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -37,7 +37,7 @@
     <div class="home-hero">
       <div class="home-top">
         <span class="brand">Calc Final Story</span>
-        <span class="chapter-pill" id="home-progress">Chapter 0 / 3</span>
+        <span class="chapter-pill" id="home-progress">Chapter 0 / 4</span>
       </div>
       <div class="home-content">
         <div class="fail-banner" id="fail-banner" role="alert">
@@ -45,7 +45,7 @@
           <p id="fail-message">A wrong answer sent Alex and Keyshawn back to the beginning. Read the story, work through the calculus carefully, and try again</p>
         </div>
         <h1>Survive the Sine Wave</h1>
-        <p class="tagline">One tropical tale. Three calculus challenges. Answer every question correctly or doom them to a terrible fate.</p>
+        <p class="tagline">One tropical tale. Four calculus challenges. Answer every question correctly or doom them to a terrible fate.</p>
         <div class="story-box">
           <p>
             <strong>Alex</strong> and <strong>Keyshawn</strong> are adrift in a small rowboat when they spot an abandoned island on the horizon.
@@ -66,6 +66,7 @@
         <h2 class="chapter-title">The Sinking Boat</h2>
         <div class="progress-steps">
           <span class="step-dot current"></span>
+          <span class="step-dot"></span>
           <span class="step-dot"></span>
           <span class="step-dot"></span>
         </div>
@@ -110,6 +111,7 @@
           <span class="step-dot done"></span>
           <span class="step-dot current"></span>
           <span class="step-dot"></span>
+          <span class="step-dot"></span>
         </div>
       </header>
 
@@ -149,6 +151,7 @@
           <span class="step-dot done"></span>
           <span class="step-dot done"></span>
           <span class="step-dot current"></span>
+          <span class="step-dot"></span>
         </div>
       </header>
 
@@ -172,6 +175,46 @@
     </div>
   </section>
 
+
+  <!-- CHAPTER 4 -->
+  <section class="screen" id="screen-ch4">
+    <div class="chapter-wrap">
+      <header class="chapter-header">
+        <p class="chapter-label">Chapter 4 - Surface Area</p>
+        <h2 class="chapter-title">The Final Snack Attack</h2>
+        <div class="progress-steps">
+          <span class="step-dot done"></span>
+          <span class="step-dot done"></span>
+          <span class="step-dot done"></span>
+          <span class="step-dot current"></span>
+        </div>
+      </header>
+
+      <figure class="scenario-visual">
+        <img src="IMG_2075.png" alt="Keyshawn's cartoon final form" width="640" height="360" />
+        <figcaption class="scenario-caption">Belly profile y = 1/2x^2 &middot; rotated around the y-axis</figcaption>
+      </figure>
+
+      <div class="narrative">
+        In one last totally cartoon twist, Keyshawn gets so hungry that he eats Alex like a Minecraft cake and instantly balloons into a massive round final boss.
+        His stomach is modelled by the parabola <em>y = 1/2x^2</em> from <em>0 &le; x &le; 2</em>, rotated around the <em>y-axis</em>.
+        Calculate the 3D surface area of Keyshawn's stomach.
+      </div>
+
+      <div class="problem-card">
+        <p class="problem-type">Surface area of revolution</p>
+        <p class="problem-text">
+          Use the surface area formula for rotating a curve around the y-axis.
+        </p>
+        <div class="math-block">
+          <span class="part-label">Surface area</span>
+          S = 2&pi;&int;<sub>0</sub><sup>2</sup> x&radic;(1 + x^2) dx
+        </div>
+        <ul class="options" id="opts-ch4"></ul>
+        <div class="feedback wrong" id="fb-ch4"></div>
+      </div>
+    </div>
+  </section>
   <!-- VICTORY -->
   <section class="screen" id="screen-victory">
     <div class="victory-card">
@@ -181,7 +224,7 @@
         <img src="assets/reward.png" alt="Celebration" width="320" height="480" />
       </figure>
       <p>
-        Alex and Keyshawn actually made it! Thanks to limits, integrals, related rates, and derivatives utilised by you at exactly the right moments.
+        Alex and Keyshawn actually made it! Thanks to limits, integrals, related rates, derivatives, and surface area utilised by you at exactly the right moments.
         The island is theirs. For now...
       </p>
       <button type="button" class="btn btn-primary" id="btn-play-again">Play again</button>
@@ -227,14 +270,26 @@
           { label: "F′(t) = 6t^2; food lasts 25 days", correct: false },
           { label: "F′(t) = −6t^2; food lasts 5 days", correct: true }
         ]
+      },
+      {
+        screen: "screen-ch4",
+        optsId: "opts-ch4",
+        fbId: "fb-ch4",
+        failMsg: "The stomach math collapsed and Keyshawn rolled off the island thanks to you. Start again from the beach.",
+        options: [
+          { label: "S = (2&pi;/3)(5&radic;5 - 1) square units", correct: true },
+          { label: "S = (&pi;/3)(5&radic;5 - 1) square units", correct: false },
+          { label: "S = 4&pi;(&radic;5 - 1) square units", correct: false },
+          { label: "S = 8&pi;/3 square units", correct: false }
+        ]
       }
     ];
-
     const LETTERS = ["A", "B", "C", "D"];
     const SUCCESS_MESSAGES = [
       "Chapter 1 cleared-the math checks out!",
       "Chapter 2 cleared-they're closing in on shore!",
-      "Chapter 3 cleared-they survive on the food long enough!"
+      "Chapter 3 cleared-they survive on the food long enough!",
+      "Chapter 4 cleared-Keyshawn's stomach has been measured!"
     ];
 
     const shuffledByChapter = CHAPTERS.map(() => []);
@@ -324,7 +379,7 @@
     function updateHomeProgress() {
       const completed = isQuizCompleted();
       document.getElementById("home-progress").textContent =
-        completed ? "Complete! 🏝️" : "Chapter 0 / 3";
+        completed ? "Complete! 🏝️" : "Chapter 0 / 4";
       document.getElementById("btn-begin").textContent =
         completed ? "Play again" : "Begin the story";
     }

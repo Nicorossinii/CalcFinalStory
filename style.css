@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap");
+﻿@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap");
 
 :root {
   /* Vibrant Minecraft-inspired palette */
@@ -413,7 +413,8 @@ body:has(#screen-home.active) .audio-toggle {
 /* ─── MINECRAFT WORLD (chapter backgrounds) ─── */
 #screen-ch1,
 #screen-ch2,
-#screen-ch3 {
+#screen-ch3,
+#screen-ch4 {
   background-color: #78c8ff;
   overflow: hidden;
 }
@@ -636,9 +637,11 @@ body:has(#screen-home.active) .audio-toggle {
 body:has(#screen-ch1.active) .tropical-bg,
 body:has(#screen-ch2.active) .tropical-bg,
 body:has(#screen-ch3.active) .tropical-bg,
+body:has(#screen-ch4.active) .tropical-bg,
 body:has(#screen-ch1.active) .palm-deco,
 body:has(#screen-ch2.active) .palm-deco,
-body:has(#screen-ch3.active) .palm-deco {
+body:has(#screen-ch3.active) .palm-deco,
+body:has(#screen-ch4.active) .palm-deco {
   visibility: hidden;
 }
 
