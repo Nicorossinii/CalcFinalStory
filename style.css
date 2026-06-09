@@ -1,27 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap");
+
 :root {
-  --sunset-top: #ff8c69;
-  --sunset-mid: #e85d4a;
-  --sky: #4ecdc4;
-  --ocean-deep: #0d4f5c;
-  --ocean: #147a8a;
-  --ocean-mid: #1a9aaa;
-  --teal: #2ec4b6;
-  --teal-light: #7ee8df;
-  --sand: #f4d58d;
-  --sand-light: #fff3c4;
-  --palm: #1b5e3a;
-  --hibiscus: #e63946;
-  --mango: #ff9f1c;
-  --surface: rgba(13, 59, 68, 0.92);
-  --surface-light: rgba(20, 80, 90, 0.94);
-  --text: #fffef7;
-  --text-muted: #c8ebe8;
-  --accent: #ffb347;
-  --accent-gold: #ffe066;
-  --correct: #2dd881;
-  --wrong: #e63946;
-  --radius: 16px;
-  --shadow: 0 12px 40px rgba(0, 40, 50, 0.45);
+  /* Minecraft-inspired solid palette */
+  --sky: #6eb5f5;
+  --sky-dark: #4a8fd4;
+  --cloud: #ffffff;
+  --grass-top: #5dba48;
+  --grass-side: #8b6914;
+  --dirt: #7a5c12;
+  --stone: #7f7f7f;
+  --stone-dark: #4a4a4a;
+  --stone-light: #a8a8a8;
+  --wood: #a0744f;
+  --wood-dark: #6b4a2e;
+  --diamond: #4aedd9;
+  --gold: #ffd700;
+  --gold-dark: #c9a600;
+  --redstone: #c41e1e;
+  --emerald: #17dd62;
+  --obsidian: #1a0f2e;
+  --gui-bg: #c6c6c6;
+  --gui-border-light: #ffffff;
+  --gui-border-dark: #555555;
+  --gui-inner: #8b8b8b;
+  --surface: #3a3a3a;
+  --surface-light: #4a4a4a;
+  --text: #ffffff;
+  --text-muted: #d4d4d4;
+  --text-dark: #2d2d2d;
+  --accent: #ffd700;
+  --accent-gold: #ffe44d;
+  --correct: #17dd62;
+  --wrong: #c41e1e;
+  --radius: 0;
+  --pixel-shadow: 4px 4px 0 #000000;
+  --bevel-out: inset 2px 2px 0 var(--gui-border-light), inset -2px -2px 0 var(--gui-border-dark);
+  --bevel-in: inset 2px 2px 0 var(--gui-border-dark), inset -2px -2px 0 var(--gui-border-light);
 }
 
 *, *::before, *::after {
@@ -32,58 +46,92 @@
 
 html {
   scroll-behavior: smooth;
+  image-rendering: pixelated;
 }
 
 body {
-  font-family: "Nunito", "Source Sans 3", system-ui, sans-serif;
-  background: var(--ocean-deep);
+  font-family: "VT323", "Courier New", monospace;
+  font-size: 1.25rem;
+  background: var(--obsidian);
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Animated tropical sky */
+/* ─── Animated pixel sky + grass strip ─── */
 .tropical-bg {
   pointer-events: none;
   position: fixed;
   inset: 0;
   z-index: 0;
-  background:
-    linear-gradient(180deg,
-      rgba(255, 140, 105, 0.35) 0%,
-      rgba(78, 205, 196, 0.2) 35%,
-      rgba(13, 79, 92, 0.85) 70%,
-      #082830 100%);
+  background-color: var(--sky);
+  overflow: hidden;
 }
 
 .tropical-bg::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 15% 10%, rgba(255, 224, 102, 0.25), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 85% 5%, rgba(255, 159, 28, 0.2), transparent 50%);
+  background-color: var(--sky);
+  animation: sky-pulse 8s steps(4) infinite;
 }
 
+.tropical-bg::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: var(--grass-top);
+  border-top: 4px solid #4a9040;
+  box-shadow:
+    0 4px 0 var(--grass-side),
+    0 8px 0 var(--dirt),
+    0 12px 0 #6b5010;
+}
+
+@keyframes sky-pulse {
+  0%, 100% { background-color: var(--sky); }
+  50% { background-color: var(--sky-dark); }
+}
+
+/* Pixel clouds */
 .palm-deco {
   pointer-events: none;
   position: fixed;
-  font-size: 4rem;
-  opacity: 0.12;
   z-index: 0;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  width: 80px;
+  height: 32px;
+  background-color: var(--cloud);
+  box-shadow:
+    -24px 8px 0 var(--cloud),
+    24px 8px 0 var(--cloud),
+    -12px -8px 0 var(--cloud),
+    12px -8px 0 var(--cloud),
+    0 -16px 0 var(--cloud);
+  animation: cloud-drift 24s linear infinite;
+  font-size: 0;
+  opacity: 0.9;
 }
 
 .palm-deco--left {
-  top: 8%;
-  left: -0.5rem;
-  transform: rotate(-25deg);
+  top: 12%;
+  left: -120px;
+  animation-duration: 28s;
 }
 
 .palm-deco--right {
-  top: 12%;
-  right: -0.5rem;
-  transform: rotate(15deg) scaleX(-1);
+  top: 22%;
+  left: -200px;
+  animation-duration: 20s;
+  animation-delay: -8s;
+  transform: scale(0.75);
+}
+
+@keyframes cloud-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(100vw + 240px)); }
 }
 
 .screen {
@@ -110,11 +158,21 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   background:
-    linear-gradient(180deg,
-      rgba(255, 140, 105, 0.25) 0%,
-      rgba(46, 196, 182, 0.15) 30%,
-      rgba(8, 40, 48, 0.92) 85%),
-    url("assets/scenario-ch3-supplies.png") center 30% / cover no-repeat;
+    url("gettyimages-141810255-2048x2048.jpg") center 30% / cover no-repeat;
+}
+
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(26, 15, 46, 0.55);
+  z-index: 0;
+}
+
+.home-top,
+.home-content {
+  position: relative;
+  z-index: 1;
 }
 
 .home-top {
@@ -122,29 +180,42 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: rgba(58, 58, 58, 0.92);
+  border-bottom: 4px solid var(--stone-dark);
+  box-shadow: 0 4px 0 #000000;
 }
 
 .brand {
-  font-family: "Pacifico", "DM Serif Display", cursive;
-  font-size: 1.65rem;
-  color: var(--sand-light);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.55rem, 2.5vw, 0.75rem);
+  color: var(--gold);
+  text-shadow:
+    2px 2px 0 #000000,
+    4px 4px 0 var(--wood-dark);
+  line-height: 1.6;
+  animation: title-glow 3s steps(2) infinite;
+}
+
+@keyframes title-glow {
+  0%, 100% { color: var(--gold); }
+  50% { color: var(--accent-gold); }
 }
 
 .chapter-pill {
-  font-size: 0.75rem;
-  font-weight: 800;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background: linear-gradient(135deg, rgba(46, 196, 182, 0.35), rgba(255, 179, 71, 0.2));
-  border: 1px solid rgba(126, 232, 223, 0.5);
-  padding: 0.4rem 0.85rem;
-  border-radius: 999px;
-  color: var(--teal-light);
+  letter-spacing: 0.04em;
+  background-color: var(--stone);
+  border: 3px solid;
+  border-color: var(--stone-light) var(--stone-dark) var(--stone-dark) var(--stone-light);
+  padding: 0.5rem 0.75rem;
+  color: var(--text);
+  box-shadow: var(--pixel-shadow);
 }
 
 .home-content {
-  padding: 2rem 1.5rem 3rem;
+  padding: 2rem 1.5rem 5rem;
   max-width: 640px;
   margin: 0 auto;
   width: 100%;
@@ -152,50 +223,67 @@ body {
 }
 
 .home-content h1 {
-  font-family: "Pacifico", "DM Serif Display", cursive;
-  font-size: clamp(2.25rem, 8vw, 3.25rem);
-  line-height: 1.2;
-  color: var(--sand-light);
-  margin-bottom: 1rem;
-  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.85rem, 4vw, 1.25rem);
+  line-height: 1.8;
+  color: var(--diamond);
+  margin-bottom: 1.25rem;
+  text-shadow:
+    2px 0 0 #000000,
+    0 2px 0 #000000,
+    2px 2px 0 #000000,
+    4px 4px 0 var(--stone-dark);
+  animation: block-bob 2s steps(2) infinite;
+}
+
+@keyframes block-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 
 .home-content .tagline {
-  font-size: 1.0625rem;
+  font-size: 1.35rem;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
-  line-height: 1.65;
+  line-height: 1.5;
+  text-shadow: 2px 2px 0 #000000;
 }
 
 .story-box {
-  background: var(--surface);
-  border: 2px solid rgba(126, 232, 223, 0.35);
-  border-radius: var(--radius);
+  background-color: var(--surface);
+  border: 4px solid;
+  border-color: var(--stone-light) var(--stone-dark) var(--stone-dark) var(--stone-light);
   padding: 1.25rem 1.5rem;
   text-align: left;
   margin-bottom: 1.75rem;
-  box-shadow: var(--shadow);
+  box-shadow: var(--pixel-shadow);
   position: relative;
   overflow: hidden;
 }
 
 .story-box::before {
-  content: "🌺";
+  content: "⛏";
   position: absolute;
   top: 0.5rem;
   right: 0.75rem;
-  font-size: 1.25rem;
-  opacity: 0.6;
+  font-size: 1.5rem;
+  opacity: 0.7;
+  animation: pickaxe-swing 1.5s steps(3) infinite;
+}
+
+@keyframes pickaxe-swing {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-20deg); }
 }
 
 .story-box p {
-  font-size: 0.9375rem;
-  line-height: 1.7;
+  font-size: 1.2rem;
+  line-height: 1.5;
   color: var(--text-muted);
 }
 
 .story-box strong {
-  color: var(--accent-gold);
+  color: var(--gold);
 }
 
 .btn {
@@ -203,32 +291,39 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  padding: 0.9rem 2.25rem;
-  border: none;
-  border-radius: 999px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.65rem;
+  padding: 1rem 1.75rem;
+  border: 4px solid;
+  border-color: var(--gui-border-light) var(--gui-border-dark) var(--gui-border-dark) var(--gui-border-light);
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
   text-transform: uppercase;
+  transition: none;
+  image-rendering: pixelated;
 }
 
 .btn:active {
-  transform: scale(0.98);
+  border-color: var(--gui-border-dark) var(--gui-border-light) var(--gui-border-light) var(--gui-border-dark);
+  box-shadow: var(--bevel-in);
+  transform: translate(2px, 2px);
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--mango) 0%, var(--hibiscus) 55%, var(--teal) 100%);
-  color: var(--text);
-  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  background-color: var(--gui-bg);
+  color: var(--text-dark);
+  box-shadow: var(--pixel-shadow);
+  animation: btn-idle 2s steps(2) infinite;
+}
+
+@keyframes btn-idle {
+  0%, 100% { box-shadow: var(--pixel-shadow); }
+  50% { box-shadow: 6px 6px 0 #000000; }
 }
 
 .btn-primary:hover {
-  box-shadow: 0 8px 28px rgba(255, 159, 28, 0.45);
-  transform: translateY(-2px);
+  background-color: #d8d8d8;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000000;
 }
 
 .audio-toggle {
@@ -236,38 +331,40 @@ body {
   top: 1rem;
   right: 1rem;
   z-index: 200;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  border: 2px solid rgba(126, 232, 223, 0.5);
-  background: var(--surface);
-  color: var(--teal-light);
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid;
+  border-color: var(--gui-border-light) var(--gui-border-dark) var(--gui-border-dark) var(--gui-border-light);
+  background-color: var(--gui-bg);
+  color: var(--text-dark);
   cursor: pointer;
   font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, color 0.2s;
+  box-shadow: var(--pixel-shadow);
+  font-family: "Press Start 2P", monospace;
 }
 
 .audio-toggle:hover {
-  background: rgba(46, 196, 182, 0.3);
-  color: var(--text);
+  background-color: var(--gold);
 }
 
 .audio-toggle.muted {
-  opacity: 0.6;
+  opacity: 0.55;
+  background-color: var(--stone);
+  color: var(--text);
 }
 
 .fail-banner {
   display: none;
-  background: linear-gradient(90deg, rgba(230, 57, 70, 0.25), rgba(255, 140, 105, 0.1));
-  border: 2px solid var(--wrong);
-  border-radius: var(--radius);
+  background-color: #4a1515;
+  border: 4px solid var(--wrong);
   padding: 1rem 1.25rem;
   margin-bottom: 1.25rem;
   text-align: left;
-  animation: shake 0.5s ease;
+  box-shadow: var(--pixel-shadow);
+  animation: shake 0.5s steps(4);
 }
 
 .fail-banner.visible {
@@ -275,23 +372,23 @@ body {
 }
 
 .fail-banner h3 {
-  font-family: "Pacifico", cursive;
-  font-size: 1.35rem;
-  color: #ffc9c4;
-  margin-bottom: 0.35rem;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.65rem;
+  color: #ff6b6b;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
 }
 
 .fail-banner p {
-  font-size: 0.875rem;
+  font-size: 1.1rem;
   color: var(--text-muted);
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-6px); }
-  40% { transform: translateX(6px); }
-  60% { transform: translateX(-4px); }
-  80% { transform: translateX(4px); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-4px); }
 }
 
 /* ─── CHAPTERS ─── */
@@ -307,71 +404,85 @@ body {
 
 .chapter-header {
   margin-bottom: 1.25rem;
+  padding: 1rem;
+  background-color: var(--surface);
+  border: 4px solid;
+  border-color: var(--wood) var(--wood-dark) var(--wood-dark) var(--wood);
+  box-shadow: var(--pixel-shadow);
 }
 
 .chapter-label {
-  font-size: 0.6875rem;
-  font-weight: 800;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--mango);
-  margin-bottom: 0.35rem;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
 }
 
 .chapter-title {
-  font-family: "Pacifico", "DM Serif Display", cursive;
-  font-size: clamp(1.85rem, 5vw, 2.5rem);
-  color: var(--sand-light);
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.7rem, 3.5vw, 1rem);
+  color: var(--diamond);
+  line-height: 1.7;
+  text-shadow: 2px 2px 0 #000000;
 }
 
 .progress-steps {
   display: flex;
-  gap: 0.5rem;
+  gap: 6px;
   margin-top: 1rem;
 }
 
 .step-dot {
   flex: 1;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.15);
-  transition: background 0.3s, box-shadow 0.3s;
+  height: 12px;
+  background-color: var(--stone-dark);
+  border: 2px solid #000000;
+  transition: background-color 0.2s steps(1);
 }
 
 .step-dot.done {
-  background: linear-gradient(90deg, var(--correct), var(--teal));
+  background-color: var(--emerald);
+  box-shadow: inset 0 0 0 2px #0d9e42;
 }
 
 .step-dot.current {
-  background: linear-gradient(90deg, var(--mango), var(--teal-light));
-  box-shadow: 0 0 12px rgba(255, 179, 71, 0.6);
+  background-color: var(--gold);
+  animation: step-blink 1s steps(2) infinite;
+}
+
+@keyframes step-blink {
+  0%, 100% { background-color: var(--gold); }
+  50% { background-color: var(--gold-dark); }
 }
 
 .narrative {
-  background: var(--surface);
-  border-left: 5px solid var(--mango);
-  border-radius: 0 var(--radius) var(--radius) 0;
+  background-color: var(--surface);
+  border: 4px solid;
+  border-left: 8px solid var(--gold);
+  border-color: var(--stone-light) var(--stone-dark) var(--stone-dark) var(--gold);
   padding: 1.125rem 1.25rem;
   margin-bottom: 1.25rem;
-  font-size: 0.9375rem;
-  line-height: 1.75;
+  font-size: 1.2rem;
+  line-height: 1.5;
   color: var(--text-muted);
-  box-shadow: var(--shadow);
+  box-shadow: var(--pixel-shadow);
 }
 
 .narrative em {
-  color: var(--accent-gold);
+  color: var(--diamond);
   font-style: normal;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .scenario-visual {
   margin-bottom: 1.25rem;
-  border-radius: var(--radius);
   overflow: hidden;
-  border: 3px solid rgba(126, 232, 223, 0.4);
-  box-shadow: var(--shadow);
-  background: rgba(0, 0, 0, 0.2);
+  border: 4px solid #000000;
+  box-shadow: var(--pixel-shadow);
+  background-color: var(--stone-dark);
 }
 
 .scenario-visual img {
@@ -381,63 +492,69 @@ body {
   max-height: 220px;
   object-fit: cover;
   object-position: center;
+  image-rendering: pixelated;
 }
 
 .scenario-caption {
   padding: 0.5rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.45rem;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--teal-light);
-  background: rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  background-color: var(--stone-dark);
   text-align: center;
+  line-height: 1.6;
+  border-top: 4px solid #000000;
 }
 
 .problem-card {
-  background: var(--surface-light);
-  border: 2px solid rgba(126, 232, 223, 0.3);
-  border-radius: var(--radius);
+  background-color: var(--gui-bg);
+  border: 4px solid;
+  border-color: var(--gui-border-light) var(--gui-border-dark) var(--gui-border-dark) var(--gui-border-light);
   padding: 1.5rem;
-  box-shadow: var(--shadow);
+  box-shadow: var(--pixel-shadow);
+  color: var(--text-dark);
 }
 
 .problem-type {
-  font-size: 0.6875rem;
-  font-weight: 800;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.45rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--mango);
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.06em;
+  color: var(--wood-dark);
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
 }
 
 .problem-text {
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 1.15rem;
+  line-height: 1.5;
   margin-bottom: 0.75rem;
+  color: var(--text-dark);
 }
 
 .math-block {
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 12px;
+  background-color: #2d2d2d;
   padding: 1rem 1.125rem;
-  font-family: "Cambria Math", "Times New Roman", serif;
-  font-size: 1.05rem;
+  font-family: "VT323", "Courier New", monospace;
+  font-size: 1.25rem;
   margin: 1rem 0;
-  line-height: 1.8;
-  color: var(--text);
-  border: 1px solid rgba(126, 232, 223, 0.25);
+  line-height: 1.6;
+  color: var(--diamond);
+  border: 4px solid #000000;
+  box-shadow: inset 0 0 0 2px var(--stone);
 }
 
 .math-block .part-label {
-  font-family: "Nunito", "Source Sans 3", sans-serif;
-  font-size: 0.6875rem;
-  font-weight: 800;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.4rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--teal-light);
+  letter-spacing: 0.04em;
+  color: var(--gold);
   display: block;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
 }
 
 .options {
@@ -452,25 +569,25 @@ body {
   width: 100%;
   text-align: left;
   padding: 1rem 1.125rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(126, 232, 223, 0.3);
-  border-radius: 12px;
-  color: var(--text);
-  font-family: inherit;
-  font-size: 0.9375rem;
-  font-weight: 700;
+  background-color: #9a9a9a;
+  border: 3px solid;
+  border-color: #c0c0c0 #404040 #404040 #c0c0c0;
+  color: var(--text-dark);
+  font-family: "VT323", monospace;
+  font-size: 1.15rem;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  box-shadow: 2px 2px 0 #000000;
 }
 
 .option-btn:hover:not(:disabled) {
-  border-color: var(--mango);
-  background: rgba(255, 159, 28, 0.12);
-  transform: translateX(4px);
+  border-color: var(--gold) #8a7000 #8a7000 var(--gold);
+  background-color: #b0b0b0;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 #000000;
 }
 
 .option-btn:disabled {
-  opacity: 0.7;
+  opacity: 0.65;
   cursor: default;
 }
 
@@ -480,21 +597,23 @@ body {
   justify-content: center;
   width: 1.75rem;
   height: 1.75rem;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--ocean-mid), var(--teal));
-  font-size: 0.75rem;
-  font-weight: 800;
+  background-color: var(--stone-dark);
+  border: 2px solid #000000;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.45rem;
   margin-right: 0.625rem;
-  color: var(--sand-light);
+  color: var(--gold);
 }
 
 .feedback {
   margin-top: 1rem;
   padding: 0.875rem 1rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
+  font-family: "VT323", monospace;
+  font-size: 1.1rem;
   font-weight: 700;
   display: none;
+  border: 4px solid #000000;
+  box-shadow: var(--pixel-shadow);
 }
 
 .feedback.show {
@@ -502,15 +621,15 @@ body {
 }
 
 .feedback.wrong {
-  background: rgba(230, 57, 70, 0.18);
-  border: 2px solid var(--wrong);
-  color: #ffc9c4;
+  background-color: #4a1515;
+  border-color: var(--wrong);
+  color: #ff8a8a;
 }
 
 .feedback.right {
-  background: rgba(45, 216, 129, 0.15);
-  border: 2px solid var(--correct);
-  color: #b8f5d4;
+  background-color: #0d3d22;
+  border-color: var(--correct);
+  color: #7dffb0;
 }
 
 /* Success reward overlay */
@@ -522,9 +641,8 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  background: rgba(8, 40, 48, 0.88);
-  backdrop-filter: blur(6px);
-  animation: fadeIn 0.35s ease;
+  background-color: rgba(26, 15, 46, 0.9);
+  animation: fadeIn 0.35s steps(4);
 }
 
 .success-overlay.visible {
@@ -535,32 +653,40 @@ body {
   max-width: 360px;
   width: 100%;
   text-align: center;
-  background: linear-gradient(160deg, rgba(255, 159, 28, 0.15), var(--surface));
-  border: 3px solid var(--accent-gold);
-  border-radius: var(--radius);
+  background-color: var(--gui-bg);
+  border: 4px solid;
+  border-color: var(--gold) #8a7000 #8a7000 var(--gold);
   padding: 1.5rem;
-  box-shadow: 0 0 48px rgba(255, 224, 102, 0.25);
+  box-shadow: 8px 8px 0 #000000;
+  animation: card-pop 0.4s steps(4);
+}
+
+@keyframes card-pop {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 .success-card h3 {
-  font-family: "Pacifico", cursive;
-  font-size: 1.75rem;
-  color: var(--sand-light);
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.75rem;
+  color: var(--wood-dark);
   margin-bottom: 0.75rem;
+  line-height: 1.6;
 }
 
 .success-card img {
   width: 100%;
   max-height: 420px;
   object-fit: contain;
-  border-radius: 12px;
-  background: #000;
+  border: 4px solid #000000;
+  background-color: transparent;
+  image-rendering: pixelated;
 }
 
 .success-card p {
   margin-top: 0.75rem;
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-size: 1.1rem;
+  color: var(--text-dark);
 }
 
 @keyframes fadeIn {
@@ -578,62 +704,116 @@ body {
 
 .victory-card {
   max-width: 520px;
-  background: var(--surface);
-  border: 3px solid var(--accent-gold);
-  border-radius: var(--radius);
+  background-color: var(--surface);
+  border: 4px solid;
+  border-color: var(--gold) #8a7000 #8a7000 var(--gold);
   padding: 2.5rem 2rem;
-  box-shadow: 0 0 48px rgba(255, 159, 28, 0.2);
+  box-shadow: 8px 8px 0 #000000;
+  animation: victory-rise 0.6s steps(6);
+}
+
+@keyframes victory-rise {
+  from { transform: translateY(32px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .victory-card h2 {
-  font-family: "Pacifico", cursive;
-  font-size: 2.5rem;
-  color: var(--sand-light);
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(0.7rem, 3.5vw, 1rem);
+  color: var(--gold);
   margin-bottom: 1rem;
+  line-height: 1.7;
+  text-shadow: 2px 2px 0 #000000;
+  animation: title-glow 2s steps(2) infinite;
 }
 
 .victory-card p {
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.5;
   margin-bottom: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .victory-reward {
   margin-bottom: 1.25rem;
-  border-radius: var(--radius);
   overflow: hidden;
-  border: 3px solid rgba(126, 232, 223, 0.4);
+  border: 4px solid var(--diamond);
+  box-shadow: var(--pixel-shadow);
+  animation: block-bob 3s steps(2) infinite;
 }
 
 .victory-reward img {
   width: 100%;
   max-height: 360px;
   object-fit: contain;
-  background: #000;
+  background-color: transparent;
+  image-rendering: pixelated;
 }
 
 .wave-deco {
-  font-size: 2rem;
-  letter-spacing: 0.25em;
+  font-family: "Press Start 2P", monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
   margin-bottom: 1rem;
-  animation: wave 2s ease-in-out infinite;
+  color: var(--emerald);
+  animation: xp-orbs 1.5s steps(3) infinite;
+}
+
+@keyframes xp-orbs {
+  0%, 100% { color: var(--emerald); transform: translateY(0); }
+  33% { color: var(--diamond); transform: translateY(-4px); }
+  66% { color: var(--gold); transform: translateY(-8px); }
 }
 
 #screen-ch1,
 #screen-ch2,
 #screen-ch3 {
-  background:
-    linear-gradient(180deg, rgba(255, 140, 105, 0.12) 0%, rgba(8, 40, 48, 0.95) 100%);
+  background-color: rgba(58, 58, 58, 0.95);
+  border-top: 4px solid var(--grass-top);
 }
 
-@keyframes wave {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+/* Floating ore particles */
+#screen-ch1::before,
+#screen-ch2::before,
+#screen-ch3::before {
+  content: "◆";
+  position: fixed;
+  top: 15%;
+  right: 10%;
+  font-size: 1rem;
+  color: var(--diamond);
+  opacity: 0.4;
+  animation: ore-float 4s steps(4) infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#screen-ch2::before {
+  color: var(--gold);
+  top: 25%;
+  right: 85%;
+  animation-delay: -1.5s;
+}
+
+#screen-ch3::before {
+  color: var(--emerald);
+  top: 40%;
+  right: 15%;
+  animation-delay: -3s;
+}
+
+@keyframes ore-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+  50% { transform: translateY(-16px) rotate(90deg); opacity: 0.7; }
 }
 
 @media (max-width: 480px) {
   .home-hero {
     background-position: center 25%;
+  }
+
+  .home-content {
+    padding-bottom: 5.5rem;
   }
 
   .problem-card {
@@ -642,5 +822,14 @@ body {
 
   .scenario-visual img {
     max-height: 180px;
+  }
+
+  .brand {
+    font-size: 0.5rem;
+  }
+
+  .chapter-pill {
+    font-size: 0.4rem;
+    padding: 0.4rem 0.5rem;
   }
 }
